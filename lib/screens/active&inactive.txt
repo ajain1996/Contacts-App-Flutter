@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: MyWidget(),
+    ),
+  );
+}
+
+class MyWidget extends StatefulWidget {
+  MyWidget({Key key}) : super(key: key);
+
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  bool _enabled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final customText = Theme(
+      data: ThemeData(
+        disabledColor: Colors.green,
+      ),
+      child: TextFormField(
+        enabled: _enabled,
+        decoration: const InputDecoration(
+          icon: Icon(Icons.person),
+          hintText: 'What do people call you?',
+          labelText: 'Name *',
+        ),
+      ),
+    );
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Text('Deliver features faster'),
+            Text('Craft beautiful UIs'),
+            customText,
+            RaisedButton(
+              onPressed: () {
+                setState(() {
+                  _enabled = !_enabled;
+                });
+              },
+              child: const Text(
+                'Enabled Button',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
